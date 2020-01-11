@@ -1,0 +1,22 @@
+{
+  "name": "qds2020",
+  "version": "1.0.0",
+  "description": "Team 14",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yogiduzit/QDS2020.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yogiduzit/QDS2020/issues"
+  },
+  "homepage": "https://github.com/yogiduzit/QDS2020#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
