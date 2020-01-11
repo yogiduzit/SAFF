@@ -162,4 +162,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+/public/ChrisTest/
+
 # End of https://www.gitignore.io/api/node,macos,windows
