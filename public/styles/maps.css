@@ -15,7 +15,7 @@
 /* GLOBAL */
 
     body {
-        
+        font-size: 30pt;
     }
 
     .main_container {
@@ -28,12 +28,12 @@
 /* MEDIA QUERIES */
 @media only screen and (min-width: 380px) {
 	body {
-		font-size: 16pt;
+		font-size: 30pt;
 	}
 }
 @media only screen and (min-width: 500px) {
 	body {
-		font-size: 18pt;
+		font-size: 30pt;
 	}
 }
 
@@ -42,6 +42,10 @@
         background-color: var(--color-primary);
         display: fixed;
         z-index: 4;
+    }
+
+    .map_search {
+        height: 100%;
     }
 
 /* MAP */
@@ -57,12 +61,28 @@
         background-color: var(--color-primary);
         position: fixed;
         display: flex;
+        flex-direction: column;
         align-items: flex-start;
-
+        
         width: 100vh;
         height: 50vh;
-        color: var(--color-dark);
+        /* color: var(--color-dark); */
         z-index: 4;
+        background: #FFFFFF;
+        box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 13px;
     }
+
+    .slider_icon {
+        width: 100vh;
+        background-color: aquamarine;
+        /* font-size: 50pt; */
+    }
+
+    i.material-icons {
+        font-size: 100pt;
+        color: var(--color-dark);
+    }
+    
 
 
