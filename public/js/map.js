@@ -27,14 +27,15 @@ function initAutocomplete() {
     if (places.length == 0) {
       return;
     }
-
     // Clear out the old markers.
-    searchresults.forEach(function(icon) {
-      icon.setMap(null);
-    });
-    searchresults = [];
+    if (markers.length > 0) {
+      marker.forEach((marker) => {
+        marker.setMap(null);
+      });
+    }
+    markers = [];
 
-    // For each place, get the icon, name and location.
+    places = await getBikeRacks();
 
     var bounds = new google.maps.LatLngBounds();
     if (!(places && places.length != 0)) {
@@ -43,16 +44,10 @@ function initAutocomplete() {
     }
     places.forEach(record => {
       // Create a marker for each place.
-      searchresults.push(new google.maps.Marker({
+      markers.push(new google.maps.Marker({
         map: map,
-
+        position: new google.maps.LatLng(record['Latitude'], record['Longitude'])
       }));
-
-      if (place.geometry.viewport) {
-        bounds.union(place.geometry.viewport);
-      } else {
-        bounds.extend(place.geometry.location);
-      }
     });
     var markerCluster = new MarkerClusterer(map, markers, {
       imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
