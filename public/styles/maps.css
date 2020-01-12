@@ -41,7 +41,12 @@
     .header {
         background-color: var(--color-primary);
         display: fixed;
+        width: 100%;
         z-index: 4;
+    }
+
+    .input-group{
+        width: 100%;
     }
 
     .map_search {
@@ -64,7 +69,7 @@
         flex-direction: column;
         align-items: flex-start;
         
-        bottom: -40vh;
+        bottom: -60px;
         width: 100vh;
         height: 50vh;
         /* color: var(--color-dark); */
@@ -78,17 +83,17 @@
 
     .expand{
         height: 60vh;
-        transform: translate(0, -30vh);
+        transform: translate(0, -30px);
     }
 
     .slider_icon {
         width: 100vh;
-        background-color: aquamarine;
-        /* font-size: 50pt; */
+        /* background-color: aquamarine; */
+        
     }
 
-    i.material-icons {
-        font-size: 100pt;
+    .material-icons.slider_icon {
+        font-size: 40pt;
         color: var(--color-dark);
     }
     
