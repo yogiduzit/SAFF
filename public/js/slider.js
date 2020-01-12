@@ -4,6 +4,10 @@ const slide = document.getElementById('slide');
 const slider = document.getElementById('slider');
 
 slide.addEventListener('click', e => {
-	e.preventDefault();
-	slider.classList.add('expand');
+    e.preventDefault();
+    if(slider.classList.contains('expand')){
+        slider.classList.remove('expand');
+    } else {
+    slider.classList.add('expand');
+    }
 });
