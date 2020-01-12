@@ -82,20 +82,11 @@ html, body {
   width: 345px;
 }
 
-@keyframes resizeAnim {
-  0% {
-      padding: 20px;
-  }
+#pac-input.controls {
+  display: block !important;
+  position: relative !important;
+  size: 100vw;
+  left: -10px !important;
+  top: 50px !important;
 
-  30% {
-      padding: 25px;
-  }
-
-  100% {
-      padding: 20px;
-  }
-}
-
-.controlDiv a:hover {
-  animation: resizeAnim 2s;
 }

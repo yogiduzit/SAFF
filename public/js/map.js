@@ -6,8 +6,8 @@ var layers = [];
 
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 49.248499, lng: -123.001375},
-    zoom: 8,
+    center: {lat: 49.248499, lng: -123.1},
+    zoom: 12,
     mapTypeId: 'roadmap'
   });
   // Create the search box and link it to the UI element.
@@ -51,20 +51,19 @@ function initAutocomplete() {
     const bikeRacks = await getBikeRacks();
     const lat = places[0].geometry.location.lat();
     const lng = places[0].geometry.location.lng();
-
-    places = parseRadialData(lat, lng, map, 2, bikeRacks);
+    if (places[0]) {
+      places = parseRadialData(lat, lng, map, 2, bikeRacks);
+    }
 
     var bounds = new google.maps.LatLngBounds();
     if (!(places && places.length != 0)) {
+      $('.location-heading').text("No matches found");
       console.log("There are no places");
       return;
     }
     places.forEach(place => {
       // Create a marker for each place.
-      const marker = new google.maps.Marker({
-        map: map,
-        position: new google.maps.LatLng(place['Latitude'], place['Longitude'])
-      });
+      const marker = createMarker(place, map);
       markers.push(marker);
       markerCluster.addMarker(marker);
 
@@ -114,13 +113,12 @@ document.body.appendChild(controlDiv);
     /// add function here
 
     $(document).ready(function() {
-
-          var bike_data = "";
           
           let emptyDiv = $("#location_container");
-          emptyDiv.html("");
-          
-          for(var i = 0; i < places.length ; i++){
+          var count = 1;
+
+          emptyDiv.empty();
+          for(var i = 0; i < 5 ; i++){
 
             let location_div = $("<div></div>");
             let location_rank = $("<div>"+(i+1)+"</div>")
@@ -140,6 +138,32 @@ document.body.appendChild(controlDiv);
   });
 
   });
+  
+var heatMapData = [{
+location: new google.maps.LatLng(37.782, -122.447), weight: 0.5}
+];
+
+$.getJSON("/data/latlongtheft.json", function(data) {
+    $.each(data, function(index, d) {
+      if (d.Freq > 5)
+      heatMapData.push({location: new google.maps.LatLng(parseFloat(d.Latitude), parseFloat(d.Longtitude)), weight: parseFloat(d.Freq)});
+    });
+    console.log(heatMapData);
+    var heatmap = new google.maps.visualization.HeatmapLayer({
+    data: heatMapData,
+      radius: 24,
+      opacity: 0.8,
+      maxIntensity: 96,
+      dissipating: true
+    });
+    heatmap.setMap(map);
+});
+  
+
+  
+ 
+
+  
 }
 
 const codeAddress = (geocoder, address) => {
@@ -153,9 +177,10 @@ const codeAddress = (geocoder, address) => {
 }
 
 const getBikeRacks = async () => fetch("/data/bike_racks.json").then(res => res.json());
-const getCrimeData = async () => fetch("/data/biketheft.json").then(res => res.json());
+const getCrimeData = async () => fetch("/data/latlongtheft.json").then(res => res.json());
 
-const setHeatmapLayer = async (map, lat, lng) => {
+
+/*const setHeatmapLayer = async (map, lat, lng) => {
   const crimeData = await getCrimeData();
 
   const coords = crimeData
@@ -173,12 +198,36 @@ const setHeatmapLayer = async (map, lat, lng) => {
   });
 
   heatmap.setMap(map);
-  layers.push(heatmap);
-}
+  layers.push(heatmap);*/
+
 
 const parseRadialData = (lat, lng, map, multiplier, data) => {
   return data.filter((bikeRack) => {
     return Math
-    .sqrt(Math.abs(bikeRack['Latitude'] - lat) ** 2 + Math.abs(bikeRack['Longitude'] - lng) ** 2) <= 0.001 * multiplier
+    .sqrt(Math.abs(bikeRack['Latitude'] - lat) ** 2 + Math.abs(bikeRack['Longitude'] - lng) ** 2) <= 0.002 * multiplier
   });
+}
+
+const createMarker = (place, map) => {
+  const contentString = `<div class="content">
+  <div id="siteNotice"></div>
+  <h2 class="heading">${place['Street']}</h2>
+  <div class="body-content">
+  <h4 class="safety-score">Safety Score: 100%</h4>
+  </div>
+  </div>`;
+
+  const infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+
+  const marker = new google.maps.Marker({
+    position: new google.maps.LatLng(place['Latitude'], place['Longitude']),
+    map: map,
+    title: `${place['Street']}`
+  });
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+  return marker;
 }
