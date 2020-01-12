@@ -3,12 +3,16 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- LINK TO CSS -->
     <link rel="stylesheet" href="../styles/maps.css">
     <!-- MATERIAL ICONS API -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- JQUERY IMPORT -->
     <script src="jquery-3.4.1.min.js"></script>
+    <!-- BOOTSTRAP IMPORT -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
@@ -18,12 +22,16 @@
 
         <header class="header">
             <div class="search">
-                <!-- <form class="map_search">
-                    <input type="text" placeholder="search a location" />
-                    <input type="submit" value="search"/>
-                </form>  -->
-                
-                SEARCH BAR HERE
+                <div class="input-group search_bar">
+                    <input type="text" class="form-control" placeholder="Search" aria-label=""
+                        aria-describedby="basic-addon1">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="button">
+                            <i class="material-icons search_icon">
+                                search
+                            </i></button>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -38,14 +46,14 @@
 
         <!-- ARROW FOR SLIDING UP/DOWN -->
         <div class="slider_icon" id="slide">
-        <i class="material-icons">
-            keyboard_arrow_up
+            <i class="material-icons slider_icon">
+                keyboard_arrow_up
             </i>
         </div>
 
         <!-- LOCATION INFO GOES HERE -->
         <div class="location_info">
-        LOCATION INFO goes here
+            LOCATION INFO goes here
         </div>
 
     </div>
