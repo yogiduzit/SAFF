@@ -11,33 +11,22 @@
     <!-- BOOTSTRAP IMPORT -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- JQUERY IMPORT -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
 
-
     <div class="main_container">
-
-        <header class="header">
-            <div class="search">
-                <div class="input-group search_bar">
-                    <input type="text" class="form-control" placeholder="Search" aria-label=""
-                        aria-describedby="basic-addon1">
-                    <div class="input-group-append">
-                        <button class="btn btn-success" type="button">
-                            <i class="material-icons search_icon">
-                                search
-                            </i></button>
-                    </div>
-                </div>
-            </div>
-        </header>
-
+       
         <div id="map">
             MAP goes here
         </div>
-
-    </div>s
+       
+        <button type="button" class="btn btn-dark">Explore</button>
+    </div>
 
     <!-- DIV WITH LOCATION INFO THAT SLIDES UP/DOWN WHEN CLICKED-->
     <div class="slider" id="slider">
@@ -50,53 +39,29 @@
 
         </div>
 
-        <!-- LOCATION INFO GOES HERE -->
-        <div class="location_container">
-            
-            <div class="location_info">
-                <div class="location_ranking">
-                    1
-                </div>
-                <div class="location_name">
-                    SE16 - 3700, Willingdon Ave, Burnaby, BC V5G 3H2
-                </div>
-                <div class="location_rating">
-                    .
-                </div>
-            </div>
-            <div class="location_info">
-                <div class="location_ranking">
-                    2
-                </div>
-                <div class="location_name">
-                    SE16 - 3700, Willingdon Ave, Burnaby, BC V5G 3H2
-                </div>
-                <div class="location_rating">
-                    .
-                </div>
-            </div>
-            <div class="location_info">
-                <div class="location_ranking">
-                    3
-                </div>
-                <div class="location_name">
-                    SE16 - 3700, Willingdon Ave, Burnaby, BC V5G 3H2
-                </div>
-                <div class="location_rating">
-                    .
-                </div>
-            </div>
+        <div class="slider_icon inactive">
+            <i class="material-icons slider_icon">
+                keyboard_arrow_down
+            </i>
         </div>
         
+        <!-- LOCATION INFO GOES HERE -->
+        <div class="location_container" id="location_container">
+            <h1 style="padding: 0.45em !important;"class="location-heading">Search Nearby (ex. Vancouver City Centre)</h1>
+        </div>
+        
+       
 
     </div>
+    
     <link rel="stylesheet" href="../css/map.css">
     <input id="pac-input" class="controls" type="text" placeholder="Search... ">
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="/js/map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAUt4GtukfT57wuWBKFfrfYe4o3EseRa8&libraries=places&callback=initAutocomplete"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAUt4GtukfT57wuWBKFfrfYe4o3EseRa8&libraries=places,visualization&callback=initAutocomplete"
     async defer></script>
     <script src="../js/slider.js" type="module"></script>
+    <!-- <script src="../js/markers.js" type="module"></script> -->
 
 </body>
 

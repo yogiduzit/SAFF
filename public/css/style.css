@@ -1,10 +1,18 @@
 
+
+/** IMPORTS **/
+@import url('https://fonts.googleapis.com/css?family=Hind+Siliguri&display=swap');
+
+
+/** MISC **/
 *, ::after, ::before {
     box-sizing: content-box !important;
 }
 
 /** VARIABLES*/
 :root {
+    /** FONTS **/
+    --font-family-sanserif: 'Hind Siliguri', sans-serif;
     /** COLORS: Main **/
     --color-primary: #c0d8e0;
     --color-secondary: #56a3a6;
@@ -12,12 +20,15 @@
 
     /** COLORS: Ratings **/
     --color-success: #d4eac8;
+    --color-good: #FDF0CD;
+    --color-bad: #FAAF90;
     --color-danger: #F26A6A;
     }
 
 /* GLOBAL */
 
     body {
+        font-family: var(--font-family-sanserif);
         font-size: 30pt;
         display: flex;
         flex-direction: column;
@@ -33,12 +44,12 @@
 /* MEDIA QUERIES */
 @media only screen and (min-width: 380px) {
 	body {
-		font-size: 30pt;
+		font-size: 50pt;
 	}
 }
 @media only screen and (min-width: 500px) {
 	body {
-		font-size: 30pt;
+		font-size: 50pt;
 	}
 }
 
@@ -97,13 +108,22 @@
     .slider_icon {
         width: 100%;
         text-align: center;
-        /* background-color: aquamarine; */
-        
+        background-color: var(--color-dark);
+        border-radius: 13px 13px 0px 0px;
+    }
+
+    .slider_icon.active{
+        display: content;
+    }
+
+    .slider_icon.inactive{
+        display: none;
+       
     }
 
     .material-icons.slider_icon {
         font-size: 40pt;
-        color: var(--color-dark);
+        color: #ffffff;
     }
 
     /* LOCATION INFO */
@@ -137,10 +157,32 @@
         margin: 5%;
     }
     .location_rating {
+        font-family: var(--font-family-sanserif);
+        font-size: 50pt;
         border-radius: 50%;
         background: #F26A6A;
         width: 50px;
         height: 50px;
         color: #F26A6A;
         margin: 5%;
+    }
+
+    .location_rating_safe {
+        background: var(--color-success);
+        color: var(--color-success);
+    }
+
+    .location_rating_good{
+        background: var(--color-good);
+        color: var(--color-good);
+    }
+
+    .location_rating_bad{
+        background: var(--color-bad);
+        color: var(--color-bad);
+    }
+
+    .location_rating_danger {
+        background: var(--color-danger);
+        color:var(--color-danger);
     }
