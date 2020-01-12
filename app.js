@@ -18,6 +18,11 @@ app.get('/', (req, res) => {
   res.send(doc);
 });
 
+app.get('/map', (req, res) => {
+  let doc = fs.readFileSync("./public/html/index.html", "utf-8");
+  res.send(doc);
+});
+
 app.listen(PORT, ADDRESS, () => {
   console.log(`Listening on ${ADDRESS}:${PORT}`);
 })
