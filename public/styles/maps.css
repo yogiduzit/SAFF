@@ -1,4 +1,7 @@
 
+*, ::after, ::before {
+    box-sizing: content-box !important;
+}
 
 /** VARIABLES*/
 :root {
@@ -41,18 +44,21 @@
 
 /* SEARCH BAR */
     .header {
-        background-color: var(--color-primary);
+        /* background-color: var(--color-primary); */
         display: fixed;
         width: 100%;
         z-index: 4;
+        box-sizing: content-box;
     }
 
-    .input-group{
-        width: 100%;
-    }
-
-    .map_search {
+    .input-group.search_bar{
         height: 100%;
+        border: none;
+    }
+
+    .btn.btn-success{
+        background-color: var(--color-dark);
+        border-color: var(--color-dark);
     }
 
 /* MAP */
@@ -102,11 +108,12 @@
 
     /* LOCATION INFO */
     .location_container{
-
+        width: 100%;
     }
 
     .location_info{
-
+        height: 100px;
+        border: 1px solid var(--color-secondary);
     }
     
 
