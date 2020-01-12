@@ -63,10 +63,16 @@
 
 /* MAP */
     .map_container{
-        background-color: var(--color-secondary);
+        /* background-color: var(--color-secondary); */
         width: 100%;
         height: 100%;
         z-index: -1;
+    }
+
+    #map {
+        height: 600px;
+        width: 80%;
+        margin: auto;
     }
 
 /* SLIDER */
