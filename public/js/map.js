@@ -61,11 +61,16 @@ function initAutocomplete() {
       console.log("There are no places");
       return;
     }
+    
     places.forEach(place => {
       // Create a marker for each place.
       const marker = createMarker(place, map);
       markers.push(marker);
       markerCluster.addMarker(marker);
+      map.panTo(marker.position);
+      
+      setTimeout(function(){map.setZoom(14)}, 350)
+      
 
       // Create a div to hold the control.
 var controlDiv = document.createElement('div');
@@ -109,6 +114,8 @@ controlUI.appendChild(controlText);
 
 document.body.appendChild(controlDiv);
     });
+    
+
 
     /// add function here
 
