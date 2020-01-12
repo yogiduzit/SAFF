@@ -33,11 +33,11 @@
             </div>
         </header>
 
-        <div class="map_container">
+        <div id="map">
             MAP goes here
         </div>
 
-    </div>
+    </div>s
 
     <!-- DIV WITH LOCATION INFO THAT SLIDES UP/DOWN WHEN CLICKED-->
     <div class="slider" id="slider">
@@ -90,6 +90,12 @@
         
 
     </div>
+    <link rel="stylesheet" href="../css/map.css">
+    <input id="pac-input" class="controls" type="text" placeholder="Search... ">
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="/js/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAUt4GtukfT57wuWBKFfrfYe4o3EseRa8&libraries=places&callback=initAutocomplete"
+    async defer></script>
     <script src="../js/slider.js" type="module"></script>
 
 </body>
