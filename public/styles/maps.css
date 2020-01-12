@@ -106,6 +106,10 @@
         color: var(--color-dark);
     }
 
+    .material-icons.slider_hidden{
+        display:none;
+    }
+
     /* LOCATION INFO */
     .location_container{
         width: 100%;
