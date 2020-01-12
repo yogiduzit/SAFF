@@ -51,11 +51,13 @@ function initAutocomplete() {
     const bikeRacks = await getBikeRacks();
     const lat = places[0].geometry.location.lat();
     const lng = places[0].geometry.location.lng();
-
-    places = parseRadialData(lat, lng, map, 2, bikeRacks);
+    if (places[0]) {
+      places = parseRadialData(lat, lng, map, 2, bikeRacks);
+    }
 
     var bounds = new google.maps.LatLngBounds();
     if (!(places && places.length != 0)) {
+      $('.location-heading').text("No matches found");
       console.log("There are no places");
       return;
     }
@@ -70,13 +72,13 @@ function initAutocomplete() {
     /// add function here
 
     $(document).ready(function() {
-
-          var bike_data = "";
           
           let emptyDiv = $("#location_container");
-          var count = 1;
           
-          for(var i = 0; i < places.length ; i++){
+          var count = 1;
+
+          emptyDiv.empty();
+          for(var i = 0; i < 5 ; i++){
 
             let location_div = $("<div></div>");
             let location_rank = $("<div>"+(i+1)+"</div>")
@@ -135,7 +137,7 @@ const setHeatmapLayer = async (map, lat, lng) => {
 const parseRadialData = (lat, lng, map, multiplier, data) => {
   return data.filter((bikeRack) => {
     return Math
-    .sqrt(Math.abs(bikeRack['Latitude'] - lat) ** 2 + Math.abs(bikeRack['Longitude'] - lng) ** 2) <= 0.001 * multiplier
+    .sqrt(Math.abs(bikeRack['Latitude'] - lat) ** 2 + Math.abs(bikeRack['Longitude'] - lng) ** 2) <= 0.002 * multiplier
   });
 }
 
