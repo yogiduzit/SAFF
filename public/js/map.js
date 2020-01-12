@@ -6,7 +6,7 @@ var layers = [];
 
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 49.248499, lng: -123.001375},
+    center: {lat: 49.248499, lng: -123.1},
     zoom: 12,
     mapTypeId: 'roadmap'
   });
@@ -98,14 +98,15 @@ function initAutocomplete() {
 
   });
   
-  var heatMapData = [{
-  location: new google.maps.LatLng(37.782, -122.447), weight: 0.5}
+var heatMapData = [{
+location: new google.maps.LatLng(37.782, -122.447), weight: 0.5}
 ];
-  $.getJSON("/data/latlongtheft.json", function(data) {
-        $.each(data, function(index, d) {
-          if (d.Freq > 5)
-          heatMapData.push({location: new google.maps.LatLng(parseFloat(d.Latitude), parseFloat(d.Longtitude)), weight: parseFloat(d.Freq)});
-        });
+
+$.getJSON("/data/latlongtheft.json", function(data) {
+    $.each(data, function(index, d) {
+      if (d.Freq > 5)
+      heatMapData.push({location: new google.maps.LatLng(parseFloat(d.Latitude), parseFloat(d.Longtitude)), weight: parseFloat(d.Freq)});
+    });
     console.log(heatMapData);
     var heatmap = new google.maps.visualization.HeatmapLayer({
     data: heatMapData,
@@ -113,9 +114,9 @@ function initAutocomplete() {
       opacity: 0.8,
       maxIntensity: 96,
       dissipating: true
+    });
+    heatmap.setMap(map);
 });
-heatmap.setMap(map);
-      });
   
 
   
