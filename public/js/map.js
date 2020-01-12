@@ -6,7 +6,7 @@ var layers = [];
 
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 49.248499, lng: -123.001375},
+    center: {lat: 49.248499, lng: -123.1},
     zoom: 12,
     mapTypeId: 'roadmap'
   });
@@ -51,11 +51,13 @@ function initAutocomplete() {
     const bikeRacks = await getBikeRacks();
     const lat = places[0].geometry.location.lat();
     const lng = places[0].geometry.location.lng();
-
-    places = parseRadialData(lat, lng, map, 2, bikeRacks);
+    if (places[0]) {
+      places = parseRadialData(lat, lng, map, 2, bikeRacks);
+    }
 
     var bounds = new google.maps.LatLngBounds();
     if (!(places && places.length != 0)) {
+      $('.location-heading').text("No matches found");
       console.log("There are no places");
       return;
     }
@@ -69,6 +71,48 @@ function initAutocomplete() {
       
       setTimeout(function(){map.setZoom(14)}, 350)
       
+
+      // Create a div to hold the control.
+var controlDiv = document.createElement('div');
+controlDiv.style.backgroundColor = 'none';
+controlDiv.style.borderRadius = '13px';
+controlDiv.setAttribute("class","controlDiv");
+
+
+
+// Set CSS for the control border
+var controlUI = document.createElement('div');
+controlUI.style.backgroundColor = '#484538';
+// controlUI.style.border = '2px solid #484538';
+controlUI.style.boxShadow = '5px 10px 5px rgba(0, 0, 0, 0.05)';
+controlUI.style.top = '60px';
+controlUI.style.left = '30px';
+controlUI.style.borderRadius = '13px';
+controlUI.style.cursor = 'pointer';
+controlUI.style.marginBottom = '22px';
+controlUI.style.textAlign = 'center';
+controlUI.style.zIndex ='1000';
+controlUI.style.position = 'absolute';
+controlUI.style.height ='80px';
+controlUI.style.width = '200px';
+controlUI.title = 'Click to recenter the map';
+controlDiv.appendChild(controlUI);
+
+// Set CSS for the control interior
+var controlText = document.createElement('div');
+controlText.style.color = '#ffffff';
+controlText.style.textDecoration = "none";
+controlText.style.paddingTop = '20px';
+controlText.style.textalign = 'center';
+controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+controlText.style.fontSize = '25px';
+controlText.style.lineHeight = '38px';
+controlText.style.paddingLeft = '5px';
+controlText.style.paddingRight = '5px';
+controlText.innerHTML = 'Explore <i class="material-icons"> explore </i>';
+controlUI.appendChild(controlText);
+
+document.body.appendChild(controlDiv);
     });
     
 
@@ -76,13 +120,12 @@ function initAutocomplete() {
     /// add function here
 
     $(document).ready(function() {
-
-          var bike_data = "";
           
           let emptyDiv = $("#location_container");
-          emptyDiv.html("");
-          
-          for(var i = 0; i < places.length ; i++){
+          var count = 1;
+
+          emptyDiv.empty();
+          for(var i = 0; i < 5 ; i++){
 
             let location_div = $("<div></div>");
             let location_rank = $("<div>"+(i+1)+"</div>")
@@ -103,14 +146,15 @@ function initAutocomplete() {
 
   });
   
-  var heatMapData = [{
-  location: new google.maps.LatLng(37.782, -122.447), weight: 0.5}
+var heatMapData = [{
+location: new google.maps.LatLng(37.782, -122.447), weight: 0.5}
 ];
-  $.getJSON("/data/latlongtheft.json", function(data) {
-        $.each(data, function(index, d) {
-          if (d.Freq > 5)
-          heatMapData.push({location: new google.maps.LatLng(parseFloat(d.Latitude), parseFloat(d.Longtitude)), weight: parseFloat(d.Freq)});
-        });
+
+$.getJSON("/data/latlongtheft.json", function(data) {
+    $.each(data, function(index, d) {
+      if (d.Freq > 5)
+      heatMapData.push({location: new google.maps.LatLng(parseFloat(d.Latitude), parseFloat(d.Longtitude)), weight: parseFloat(d.Freq)});
+    });
     console.log(heatMapData);
     var heatmap = new google.maps.visualization.HeatmapLayer({
     data: heatMapData,
@@ -118,9 +162,9 @@ function initAutocomplete() {
       opacity: 0.8,
       maxIntensity: 96,
       dissipating: true
+    });
+    heatmap.setMap(map);
 });
-heatmap.setMap(map);
-      });
   
 
   
@@ -167,7 +211,7 @@ const getCrimeData = async () => fetch("/data/latlongtheft.json").then(res => re
 const parseRadialData = (lat, lng, map, multiplier, data) => {
   return data.filter((bikeRack) => {
     return Math
-    .sqrt(Math.abs(bikeRack['Latitude'] - lat) ** 2 + Math.abs(bikeRack['Longitude'] - lng) ** 2) <= 0.001 * multiplier
+    .sqrt(Math.abs(bikeRack['Latitude'] - lat) ** 2 + Math.abs(bikeRack['Longitude'] - lng) ** 2) <= 0.002 * multiplier
   });
 }
 
