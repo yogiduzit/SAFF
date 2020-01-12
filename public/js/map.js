@@ -61,10 +61,7 @@ function initAutocomplete() {
     }
     places.forEach(place => {
       // Create a marker for each place.
-      const marker = new google.maps.Marker({
-        map: map,
-        position: new google.maps.LatLng(place['Latitude'], place['Longitude'])
-      });
+      const marker = createMarker(place, map);
       markers.push(marker);
       markerCluster.addMarker(marker);
 
@@ -140,4 +137,28 @@ const parseRadialData = (lat, lng, map, multiplier, data) => {
     return Math
     .sqrt(Math.abs(bikeRack['Latitude'] - lat) ** 2 + Math.abs(bikeRack['Longitude'] - lng) ** 2) <= 0.001 * multiplier
   });
+}
+
+const createMarker = (place, map) => {
+  const contentString = `<div class="content">
+  <div id="siteNotice"></div>
+  <h2 class="heading">${place['Street']}</h2>
+  <div class="body-content">
+  <h4 class="safety-score">Safety Score: 100%</h4>
+  </div>
+  </div>`;
+
+  const infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+
+  const marker = new google.maps.Marker({
+    position: new google.maps.LatLng(place['Latitude'], place['Longitude']),
+    map: map,
+    title: `${place['Street']}`
+  });
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+  return marker;
 }
