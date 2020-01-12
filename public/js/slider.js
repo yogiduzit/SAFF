@@ -2,7 +2,7 @@
 
 const slide = document.getElementById('slide');
 const slider = document.getElementById('slider')
-const slideIcon = document.getElementById('');
+// const slideIcon = document.getElementById('');
 
 slide.addEventListener('click', e => {
     e.preventDefault();

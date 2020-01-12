@@ -91,7 +91,7 @@
 
     .expand{
         /* height: 60vh; */
-        transform: translate(0, -0vh);
+        transform: translate(0, -30vh);
     }
 
     .slider_icon {
