@@ -85,31 +85,35 @@ var controlUI = document.createElement('div');
 controlUI.style.backgroundColor = '#484538';
 // controlUI.style.border = '2px solid #484538';
 controlUI.style.boxShadow = '5px 10px 5px rgba(0, 0, 0, 0.05)';
+
 controlUI.style.top = '130px';
 controlUI.style.right = '30px';
+
 controlUI.style.borderRadius = '13px';
 controlUI.style.cursor = 'pointer';
 controlUI.style.marginBottom = '22px';
 controlUI.style.textAlign = 'center';
 controlUI.style.zIndex ='1000';
 controlUI.style.position = 'absolute';
-controlUI.style.height ='80px';
-controlUI.style.width = '200px';
+controlUI.style.height ='30px';
+controlUI.style.width = '120px';
 controlUI.title = 'Click to recenter the map';
+controlUI.style.display = 'flex';
+controlUI.style.flexDirection = 'row';
+controlUI.style.alignItems = 'center';
+controlUI.style.justifyContent = 'center';
 controlDiv.appendChild(controlUI);
 
 // Set CSS for the control interior
 var controlText = document.createElement('div');
 controlText.style.color = '#ffffff';
 controlText.style.textDecoration = "none";
-controlText.style.paddingTop = '20px';
 controlText.style.textalign = 'center';
 controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-controlText.style.fontSize = '25px';
+controlText.style.fontSize = '15px';
 controlText.style.lineHeight = '38px';
-controlText.style.paddingLeft = '5px';
-controlText.style.paddingRight = '5px';
-controlText.innerHTML = 'Explore <i class="material-icons"> explore </i>';
+
+controlText.innerHTML = '<a class="text-white">Explore</a>';
 controlUI.appendChild(controlText);
 
 document.body.appendChild(controlDiv);
