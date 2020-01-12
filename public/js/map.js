@@ -67,6 +67,47 @@ function initAutocomplete() {
       markers.push(marker);
       markerCluster.addMarker(marker);
 
+      // Create a div to hold the control.
+var controlDiv = document.createElement('div');
+controlDiv.style.backgroundColor = 'none';
+controlDiv.style.borderRadius = '13px';
+controlDiv.setAttribute("class","controlDiv");
+
+
+
+// Set CSS for the control border
+var controlUI = document.createElement('div');
+controlUI.style.backgroundColor = '#484538';
+// controlUI.style.border = '2px solid #484538';
+controlUI.style.boxShadow = '5px 10px 5px rgba(0, 0, 0, 0.05)';
+controlUI.style.top = '60px';
+controlUI.style.left = '30px';
+controlUI.style.borderRadius = '13px';
+controlUI.style.cursor = 'pointer';
+controlUI.style.marginBottom = '22px';
+controlUI.style.textAlign = 'center';
+controlUI.style.zIndex ='1000';
+controlUI.style.position = 'absolute';
+controlUI.style.height ='80px';
+controlUI.style.width = '200px';
+controlUI.title = 'Click to recenter the map';
+controlDiv.appendChild(controlUI);
+
+// Set CSS for the control interior
+var controlText = document.createElement('div');
+controlText.style.color = '#ffffff';
+controlText.style.textDecoration = "none";
+controlText.style.paddingTop = '20px';
+controlText.style.textalign = 'center';
+controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+controlText.style.fontSize = '25px';
+controlText.style.lineHeight = '38px';
+controlText.style.paddingLeft = '5px';
+controlText.style.paddingRight = '5px';
+controlText.innerHTML = 'Explore <i class="material-icons"> explore </i>';
+controlUI.appendChild(controlText);
+
+document.body.appendChild(controlDiv);
     });
 
     /// add function here
