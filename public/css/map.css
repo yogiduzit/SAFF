@@ -9,7 +9,7 @@ html, body {
 }
 #description {
   font-family: Roboto;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 300;
 }
 
@@ -48,19 +48,21 @@ html, body {
 
 .pac-controls label {
   font-family: Roboto;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 300;
 }
 
 #pac-input {
   background-color: #fff;
   font-family: Roboto;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
+  margin-top: 9px;
+  margin-left: 18px;
+  padding: 0px 11px 0 13px;
   text-overflow: ellipsis;
-  width: 400px;
+  width: 50%;
+  height: 40px;
 }
 
 #pac-input:focus {
@@ -74,5 +76,7 @@ html, body {
   font-weight: 500;
   padding: 6px 12px;
 }
+
 #target {
-  widt
+  width: 345px;
+}
