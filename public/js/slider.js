@@ -1,0 +1,1 @@
+// Javascript File for slider with location info
