@@ -74,7 +74,6 @@ function initAutocomplete() {
     $(document).ready(function() {
           
           let emptyDiv = $("#location_container");
-          
           var count = 1;
 
           emptyDiv.empty();
