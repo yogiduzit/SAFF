@@ -12,6 +12,8 @@
 
     /** COLORS: Ratings **/
     --color-success: #d4eac8;
+    --color-good: #FDF0CD;
+    --color-bad: #FAAF90;
     --color-danger: #F26A6A;
     }
 
@@ -143,4 +145,24 @@
         height: 50px;
         color: #F26A6A;
         margin: 5%;
+    }
+
+    .location_rating_safe {
+        background: var(--color-success);
+        color: var(--color-success);
+    }
+
+    .location_rating_good{
+        background: var(--color-good);
+        color: var(--color-good);
+    }
+
+    .location_rating_bad{
+        background: var(--color-bad);
+        color: var(--color-bad);
+    }
+
+    .location_rating_danger {
+        background: var(--color-danger);
+        color:var(--color-danger);
     }

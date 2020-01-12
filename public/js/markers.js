@@ -65,3 +65,10 @@ clickMarker.addEventListener('click', e=>{
 }
 
 locationInfo();
+
+
+// ASIDE: GENERATING A RATING
+// if rating between 1-25: .setAttribute("class","location_rating_safe")
+// if rating between 26-50: .setAttribute("class","location_rating_good")
+// if rating between 51-75: .setAttribute("class","location_rating_bad")
+// if rating between 75-100: .setAttribute("class","location_rating_danger")
