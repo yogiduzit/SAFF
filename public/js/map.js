@@ -1,15 +1,12 @@
-
 const APIKEY = "adf68c474262738c411594f324f0d792b92077232dfa1ebda30cb108"
 const RACKS_URL = "https://opendata.vancouver.ca/api/records/1.0/search?dataset=bike-racks"
 
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 49.248499, lng: -123.001375},
-    zoom: 1,
+    zoom: 8,
     mapTypeId: 'roadmap'
   });
-
-  var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
@@ -74,12 +71,14 @@ function initAutocomplete() {
     searchresults = [];
 
     // For each place, get the icon, name and location.
+
     var bounds = new google.maps.LatLngBounds();
    places.forEach(function(place) {
      if (!place.geometry) {
        console.log("Returned place contains no geometry");
        return;
      }
+
      var icon = {
        url: place.icon,
        size: new google.maps.Size(71, 71),
@@ -96,8 +95,15 @@ function initAutocomplete() {
         position: place.geometry.location
       }));
 
+      if (place.geometry.viewport) {
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
     });
+    map.fitBounds(bounds);
   });
+}
 
 const codeAddress = (geocoder, address) => {
   geocoder.geocode({ 'address': address }, (results, status) => {
