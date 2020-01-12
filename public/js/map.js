@@ -7,7 +7,7 @@ var layers = [];
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 49.248499, lng: -123.001375},
-    zoom: 8,
+    zoom: 12,
     mapTypeId: 'roadmap'
   });
   // Create the search box and link it to the UI element.
@@ -97,6 +97,31 @@ function initAutocomplete() {
   });
 
   });
+  
+  var heatMapData = [{
+  location: new google.maps.LatLng(37.782, -122.447), weight: 0.5}
+];
+  $.getJSON("/data/latlongtheft.json", function(data) {
+        $.each(data, function(index, d) {
+          if (d.Freq > 5)
+          heatMapData.push({location: new google.maps.LatLng(parseFloat(d.Latitude), parseFloat(d.Longtitude)), weight: parseFloat(d.Freq)});
+        });
+    console.log(heatMapData);
+    var heatmap = new google.maps.visualization.HeatmapLayer({
+    data: heatMapData,
+      radius: 24,
+      opacity: 0.8,
+      maxIntensity: 96,
+      dissipating: true
+});
+heatmap.setMap(map);
+      });
+  
+
+  
+ 
+
+  
 }
 
 const codeAddress = (geocoder, address) => {
@@ -110,9 +135,10 @@ const codeAddress = (geocoder, address) => {
 }
 
 const getBikeRacks = async () => fetch("/data/bike_racks.json").then(res => res.json());
-const getCrimeData = async () => fetch("/data/biketheft.json").then(res => res.json());
+const getCrimeData = async () => fetch("/data/latlongtheft.json").then(res => res.json());
 
-const setHeatmapLayer = async (map, lat, lng) => {
+
+/*const setHeatmapLayer = async (map, lat, lng) => {
   const crimeData = await getCrimeData();
 
   const coords = crimeData
@@ -130,8 +156,8 @@ const setHeatmapLayer = async (map, lat, lng) => {
   });
 
   heatmap.setMap(map);
-  layers.push(heatmap);
-}
+  layers.push(heatmap);*/
+
 
 const parseRadialData = (lat, lng, map, multiplier, data) => {
   return data.filter((bikeRack) => {
