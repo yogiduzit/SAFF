@@ -85,8 +85,10 @@ var controlUI = document.createElement('div');
 controlUI.style.backgroundColor = '#484538';
 // controlUI.style.border = '2px solid #484538';
 controlUI.style.boxShadow = '5px 10px 5px rgba(0, 0, 0, 0.05)';
-controlUI.style.top = '60px';
-controlUI.style.right = '20px';
+
+controlUI.style.top = '130px';
+controlUI.style.right = '30px';
+
 controlUI.style.borderRadius = '13px';
 controlUI.style.cursor = 'pointer';
 controlUI.style.marginBottom = '22px';
@@ -142,6 +144,29 @@ document.body.appendChild(controlDiv);
             location_div.attr("class","location_info");
             location_div.append(location_rating);
             location_rating.attr("class","location_rating");
+
+            switch(i){
+              case 0:
+                // location_rating.attr("class","location_rating_safe");
+                location_rating.css("background-color","#d4eac8");
+                break;
+              case 1:
+                location_rating.css("background-color","#d4eac8");
+                break;
+              case 2:
+                location_rating.css("background-color","#FDF0CD");
+                break;
+              case 3:
+                location_rating.css("background-color","#FAAF90");
+                break;
+              case 4:
+                location_rating.css("background-color","#F26A6A");
+                break;
+              default:
+                location_rating.css("background-color","#F26A6A");
+                break;
+            }
+
             emptyDiv.append(location_div);
           }
   });
