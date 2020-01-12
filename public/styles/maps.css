@@ -2,7 +2,6 @@
 
 /** VARIABLES*/
 :root {
-
     /** COLORS: Main **/
     --color-primary: #c0d8e0;
     --color-secondary: #56a3a6;
@@ -12,16 +11,58 @@
     --color-success: #d4eac8;
     --color-danger: #F26A6A;
     }
-    /* GLOBAL */
+
+/* GLOBAL */
 
     body {
-        color: var(--color-primary);
+        
     }
 
-    /* MAP */
+    .main_container {
+        height: 100vh;
+        width: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+/* MEDIA QUERIES */
+@media only screen and (min-width: 380px) {
+	body {
+		font-size: 16pt;
+	}
+}
+@media only screen and (min-width: 500px) {
+	body {
+		font-size: 18pt;
+	}
+}
+
+/* SEARCH BAR */
+    .header {
+        background-color: var(--color-primary);
+        display: fixed;
+        z-index: 4;
+    }
+
+/* MAP */
     .map_container{
         background-color: var(--color-secondary);
+        width: 100vh;
+        height: 100%;
+        z-index: -1;
+    }
+
+/* SLIDER */
+    .slider{
+        background-color: var(--color-primary);
+        position: fixed;
+        display: flex;
+        align-items: flex-start;
+
+        width: 100vh;
+        height: 50vh;
+        color: var(--color-dark);
+        z-index: 4;
     }
 
 
-}
