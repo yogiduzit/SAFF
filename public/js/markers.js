@@ -40,27 +40,27 @@ markerArr.forEach( data => {
 // })
 });
 
-clickMarker.addEventListener('click', e=>{
-    console.log(markerArr[1].Street + " " + markerArr[1].Latitude);
-    console.log(markerArr[1].Street + " " + markerArr[1].Longitude);
-    console.log(crimeArr[1].HUNDRED_BLOCK + crimeArr[1].Latitude);
-    console.log(crimeArr[1].HUNDRED_BLOCK + crimeArr[1].Longtitude);
+// clickMarker.addEventListener('click', e=>{
+//     console.log(markerArr[1].Street + " " + markerArr[1].Latitude);
+//     console.log(markerArr[1].Street + " " + markerArr[1].Longitude);
+//     console.log(crimeArr[1].HUNDRED_BLOCK + crimeArr[1].Latitude);
+//     console.log(crimeArr[1].HUNDRED_BLOCK + crimeArr[1].Longtitude);
 
 
-    const latDifference = (markerArr[1].Latitude - crimeArr[1].Latitude);
-    const longDifference = (markerArr[1].Longitude - crimeArr[1].Longtitude);
+//     const latDifference = (markerArr[1].Latitude - crimeArr[1].Latitude);
+//     const longDifference = (markerArr[1].Longitude - crimeArr[1].Longtitude);
 
-    console.log("LAT difference = " + latDifference);
-    console.log("LONG difference = " + longDifference);
+//     console.log("LAT difference = " + latDifference);
+//     console.log("LONG difference = " + longDifference);
 
-    if(latDifference < 5){
-        if(longDifference < 5) {
-            // let x = crime number @ that location;
-            // var rating = (x-min)/(max-min);  //max=141, min=1
-        }
-    }
+//     if(latDifference < 5){
+//         if(longDifference < 5) {
+//             // let x = crime number @ that location;
+//             // var rating = (x-min)/(max-min);  //max=141, min=1
+//         }
+//     }
     
-})
+// })
 
 }
 

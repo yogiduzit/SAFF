@@ -67,8 +67,37 @@ function initAutocomplete() {
       });
       markers.push(marker);
       markerCluster.addMarker(marker);
+
     });
-    
+
+    /// add function here
+
+    $(document).ready(function() {
+
+          var bike_data = "";
+          
+          let emptyDiv = $("#location_container");
+          var count = 1;
+          
+          for(var i = 0; i < places.length ; i++){
+
+            let location_div = $("<div></div>");
+            let location_rank = $("<div>"+(i+1)+"</div>")
+            let location_rating = $("<div></div>")
+          
+            bike_data = " " + places[i].Street;
+            console.log(places[i].Street);
+             
+            location_div.append(location_rank);
+            location_rank.attr("class","location_ranking");
+            location_div.append(bike_data);
+            location_div.attr("class","location_info");
+            location_div.append(location_rating);
+            location_rating.attr("class","location_rating");
+            emptyDiv.append(location_div);
+          }
+  });
+
   });
 }
 
