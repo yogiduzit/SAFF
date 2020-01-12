@@ -103,6 +103,15 @@
         
     }
 
+    .slider_icon.active{
+        display: content;
+    }
+
+    .slider_icon.inactive{
+        display: none;
+       
+    }
+
     .material-icons.slider_icon {
         font-size: 40pt;
         color: var(--color-dark);

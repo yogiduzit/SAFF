@@ -56,7 +56,7 @@ clickMarker.addEventListener('click', e=>{
     if(latDifference < 5){
         if(longDifference < 5) {
             // let x = crime number @ that location;
-            // var rating = (x-min)/(max-min);
+            // var rating = (x-min)/(max-min);  //max=141, min=1
         }
     }
     
