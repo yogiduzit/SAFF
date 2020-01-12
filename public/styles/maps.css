@@ -1,0 +1,27 @@
+
+
+/** VARIABLES*/
+:root {
+
+    /** COLORS: Main **/
+    --color-primary: #c0d8e0;
+    --color-secondary: #56a3a6;
+    --color-dark: #484538; 
+
+    /** COLORS: Ratings **/
+    --color-success: #d4eac8;
+    --color-danger: #F26A6A;
+    }
+    /* GLOBAL */
+
+    body {
+        color: var(--color-primary);
+    }
+
+    /* MAP */
+    .map_container{
+        background-color: var(--color-secondary);
+    }
+
+
+}
