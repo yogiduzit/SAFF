@@ -81,3 +81,10 @@ html, body {
 #target {
   width: 345px;
 }
+#pac-input.controls {
+  display: block !important;
+  position: relative !important;
+  size: 100vw;
+  left: -10px !important;
+  top: 50px !important;
+}
