@@ -81,3 +81,21 @@ html, body {
 #target {
   width: 345px;
 }
+
+@keyframes resizeAnim {
+  0% {
+      padding: 20px;
+  }
+
+  30% {
+      padding: 25px;
+  }
+
+  100% {
+      padding: 20px;
+  }
+}
+
+.controlDiv a:hover {
+  animation: resizeAnim 2s;
+}
