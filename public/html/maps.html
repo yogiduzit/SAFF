@@ -11,6 +11,8 @@
     <!-- BOOTSTRAP IMPORT -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -33,9 +35,7 @@
             </div>
         </header>
 
-        <div class="map_container">
-            MAP goes here
-        </div>
+        <div id="map"></div>
 
     </div>
 
@@ -91,6 +91,15 @@
 
     </div>
     <script src="../js/slider.js" type="module"></script>
+    <link rel="stylesheet" href="../css/map.css">
+    <input id="pac-input" class="controls" type="text" placeholder="Search... ">
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="/js/map.js"></script>
+    
+  
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAUt4GtukfT57wuWBKFfrfYe4o3EseRa8&libraries=places,visualization&callback=initAutocomplete"
+    async defer></script>
+  
 
 </body>
 
