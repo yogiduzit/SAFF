@@ -46,17 +46,18 @@ function initAutocomplete() {
     {lat: -42.735258, lng: 147.438000},
     {lat: -43.999792, lng: 170.463352}
   ]
-  
-  var markers = locations.map(function(location, i) {
+
+  var markers = locations.map(function(location) {
     return new google.maps.Marker({
       position: location,
-      label: labels[i % labels.length]
+      label: ""
     });
   });
 
+  var searchresults = [];
+
   var markerCluster = new MarkerClusterer(map, markers,
       {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-  }
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
   searchBox.addListener('places_changed', async function() {
@@ -65,32 +66,34 @@ function initAutocomplete() {
     if (places.length == 0) {
       return;
     }
-    const searchedPlace = places[0].geometry.location;
-    places = await getBikeRacks();
-
-    console.log(places);
 
     // Clear out the old markers.
-    markers.forEach(function(marker) {
-      marker.setMap(null);
+    searchresults.forEach(function(icon) {
+      icon.setMap(null);
     });
-    markers = [];
+    searchresults = [];
 
     // For each place, get the icon, name and location.
     var bounds = new google.maps.LatLngBounds();
-    places.records.forEach(record => {
-      const geocoder = new google.maps.Geocoder();
-      if (!record.fields) {
-        console.log("Returned place contains no geometry");
-        return;
-      }
-      const address = `${record.fields.street_number}.${record.fields.street_name},Vancouver`;
-      const position = codeAddress(geocoder, address);
+   places.forEach(function(place) {
+     if (!place.geometry) {
+       console.log("Returned place contains no geometry");
+       return;
+     }
+     var icon = {
+       url: place.icon,
+       size: new google.maps.Size(71, 71),
+       origin: new google.maps.Point(0, 0),
+       anchor: new google.maps.Point(17, 34),
+       scaledSize: new google.maps.Size(25, 25)
+     };
 
       // Create a marker for each place.
-      markers.push(new google.maps.Marker({
+      searchresults.push(new google.maps.Marker({
         map: map,
-        position: position
+        icon: icon,
+        title: place.name,
+        position: place.geometry.location
       }));
 
     });
@@ -105,5 +108,3 @@ const codeAddress = (geocoder, address) => {
       }
   });
 }
-
-const getBikeRacks = async () => fetch(`${RACKS_URL}&rows=10000&apikey=${APIKEY}`).then(res => res.json());
