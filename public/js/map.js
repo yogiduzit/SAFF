@@ -77,7 +77,7 @@ function initAutocomplete() {
           var bike_data = "";
           
           let emptyDiv = $("#location_container");
-          var count = 1;
+          emptyDiv.html("");
           
           for(var i = 0; i < places.length ; i++){
 
