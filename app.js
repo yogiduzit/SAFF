@@ -28,6 +28,24 @@ app.get('/', (req, res) => {
   res.send(doc);
 });
 
+
+// app.get('/ajax-GET-list', function (req, res) {
+
+//   let formatOfResponse = req.query['format']; 
+//   let dataList = null;
+
+//   // Given a query format = html-table, returns HTML data
+//   if(formatOfResponse == 'json-table') {
+//       res.setHeader('Content-Type', 'text/html');
+//       dataList = tables.getJSON();
+//       res.send(dataList);
+//   } else {
+//       res.send({msg: 'Wrong format!'});
+//   }
+// });
+
+
+
 app.listen(PORT, ADDRESS, () => {
   console.log(`Listening on ${ADDRESS}:${PORT}`);
 })
