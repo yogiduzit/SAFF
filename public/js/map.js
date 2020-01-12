@@ -2,6 +2,7 @@ const APIKEY = "adf68c474262738c411594f324f0d792b92077232dfa1ebda30cb108"
 const RACKS_URL = "https://opendata.vancouver.ca/api/records/1.0/search?dataset=bike-racks"
 var markers = [];
 var markerCluster;
+var layers = [];
 
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -25,7 +26,6 @@ function initAutocomplete() {
  
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
-  
   searchBox.addListener('places_changed', async function() {
     var places = searchBox.getPlaces();
 
@@ -33,10 +33,10 @@ function initAutocomplete() {
       return;
     }
 
+
     // Clear out the old markers.
     if (markers.length > 0) {
       markers.forEach((marker) => {
-        console.log(marker);
         if (marker) {
           marker.setMap(null);
         }
@@ -47,7 +47,12 @@ function initAutocomplete() {
     }
     markers = [];
 
-    places = await parseBikeRacks(places[0].geometry.location.lat(), places[0].geometry.location.lng(), map);
+    // Get the bike racks near current location
+    const bikeRacks = await getBikeRacks();
+    const lat = places[0].geometry.location.lat();
+    const lng = places[0].geometry.location.lng();
+
+    places = parseRadialData(lat, lng, map, 2, bikeRacks);
 
     var bounds = new google.maps.LatLngBounds();
     if (!(places && places.length != 0)) {
@@ -63,6 +68,7 @@ function initAutocomplete() {
       markers.push(marker);
       markerCluster.addMarker(marker);
     });
+    
   });
 }
 
@@ -77,13 +83,32 @@ const codeAddress = (geocoder, address) => {
 }
 
 const getBikeRacks = async () => fetch("/data/bike_racks.json").then(res => res.json());
-const getCrimeData = async () => fetch("/data/bikethefts.json").then(res => res.json());
+const getCrimeData = async () => fetch("/data/biketheft.json").then(res => res.json());
 
-const parseBikeRacks = async (lat, lng, map) => {
-  console.log(lat, lng)
-  const bikeRacks = await getBikeRacks();
-  return bikeRacks.filter((bikeRack) => {
+const setHeatmapLayer = async (map, lat, lng) => {
+  const crimeData = await getCrimeData();
+
+  const coords = crimeData
+  .filter(record => record['Latitude'] && record['Longtitude'])
+  .map(record => new google.maps.LatLng(parseFloat(record['Latitude']), parseFloat(record['Longitude'])));
+
+  if (layers[0]) {
+    layers[0].setMap(null);
+    layers[0].pop();
+  }
+  var heatmap = new google.maps.visualization.HeatmapLayer({
+    data: coords,
+    opacity: 1,
+    radius: 2
+  });
+
+  heatmap.setMap(map);
+  layers.push(heatmap);
+}
+
+const parseRadialData = (lat, lng, map, multiplier, data) => {
+  return data.filter((bikeRack) => {
     return Math
-    .sqrt(Math.abs(bikeRack['Latitude'] - lat) ** 2 + Math.abs(bikeRack['Longitude'] - lng) ** 2) <= 0.005
-  })
+    .sqrt(Math.abs(bikeRack['Latitude'] - lat) ** 2 + Math.abs(bikeRack['Longitude'] - lng) ** 2) <= 0.001 * multiplier
+  });
 }
